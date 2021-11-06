@@ -1,0 +1,10 @@
+{
+    "users":
+    [ 
+        {
+            "name":"Miachel",
+            "address":"ABC Street - Random City",
+            "phone": "+56 9 7463527"
+        }
+    ]
+}
