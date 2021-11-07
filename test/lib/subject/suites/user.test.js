@@ -20,29 +20,34 @@ function suite(){
 
         chai.request(url).get('/users').then(res =>{
             expect(res.status).to.equal(200);
+            done();
             })
             .catch(err =>{
+                done(err);
                 throwError(err);
             });
-        expect(response.status).to.equal(200);
     });
 
-    const addUserSuccessfully = allure.createStep("Step 2 - Add user successfully", async () => {
+    const addUserSuccessfully = allure.createStep("Step 2 - Add user successfully", async (done) => {
 
             chai.request(url).post('/users',  user).then(res =>{
                 expect(res.status).to.equal(200);
+                done();
                 })
                 .catch(err =>{
+                    done(err);
                     throwError(err);
                 });
 
     });
 
-    const addUserWithFail = allure.createStep("Step 3 - Validate previous added user", async () => {
+    const addUserWithFail = allure.createStep("Step 3 - Validate previous added user",  async (done) => {
         chai.request(url).post('/users',  user).then(res =>{
             expect(res.status).to.equal(200);
+            done();
             })
             .catch(err =>{
+                done(err);
                 throwError(err);
             });
     });
@@ -52,19 +57,19 @@ function suite(){
         throw new Error(err);
       });
 
-    it('Search for users', async function()
+    it('Search for users', function(done)
     {
-       getUser();
+       getUser(done);
     });
     
-    it('Add user successfully', function()
+    it('Add user successfully', function(done)
     {
-        addUserSuccessfully();       
+        addUserSuccessfully(done);       
     });
 
-    it('Validate previous added user', function()
+    it('Validate previous added user', function(done)
     {
-        addUserWithFail();
+        addUserWithFail(done);
     });
 
 }
